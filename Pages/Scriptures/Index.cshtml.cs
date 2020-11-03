@@ -23,7 +23,8 @@ namespace MyScriptureJournal.Pages.Scriptures
 
         public string BookSort { get; set; }
         public string DateSort { get; set; }
-        public IList<Journal> JournalSort { get; set; }
+
+        [BindProperty(SupportsGet = true)]
         public string CurrentFilter { get; set; }
 
         public IList<Journal> Journal { get; set; }
@@ -40,11 +41,6 @@ namespace MyScriptureJournal.Pages.Scriptures
             BookSort = String.IsNullOrEmpty(sortOrder) ? "book_desc" : "";
             DateSort = sortOrder == "Date" ? "date_desc" : "Date";
 
-            if (string.IsNullOrEmpty(SearchString))
-                SearchString = CurrentFilter;
-            else
-                CurrentFilter = SearchString;
-
             // Use LINQ to get list of books.
             IQueryable<string> noteQuery = from m in _context.Journal
                                             orderby m.Book
@@ -56,11 +52,13 @@ namespace MyScriptureJournal.Pages.Scriptures
             if (!string.IsNullOrEmpty(SearchString))
             {
                 books = books.Where(s => s.Notes.Contains(SearchString));
+                CurrentFilter = SearchString;
             }
             
             if (!string.IsNullOrEmpty(BookSSelect))
             {
                 books = books.Where(x => x.Book == BookSSelect);
+                CurrentFilter = BookSSelect;
             }
 
             // Sort

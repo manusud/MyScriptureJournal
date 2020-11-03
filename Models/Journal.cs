@@ -11,11 +11,12 @@ namespace MyScriptureJournal.Models
     {
         public int ID { get; set; }
 
+        [Display(Name = "Favorite Scripture")]
         [StringLength(60, MinimumLength = 3)]
         [Required]
         public string FavoriteScripture { get; set; }
         
-        [Display(Name = "Edition Date")]
+        [Display(Name = "Added Date")]
         [DataType(DataType.Date)]
         [Required]
         public DateTime EditionDate { get; set; }

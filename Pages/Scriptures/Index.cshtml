@@ -5,25 +5,27 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="color_1">Index</h1>
 
 <p>
     <a asp-page="Create">Click to Create a New Note</a>
 </p>
 
 <form>
-    <p>
-        Select the Book:
+
+        <div class="color_1">Select the Book</div>
         <select asp-for="BookSSelect" asp-items="Model.Notes">
             <option value="">All</option>
         </select>
-        Filter by Note: <input type="text" asp-for="SearchString" />
+
+        <div class="color_1">Filter by Note</div>
+        <input type="text" asp-for="SearchString" />
         <input type="submit" value="Filter" />
-    </p>
+
 </form>
 
 <table class="table">
-    <thead>
+    <thead class="text-warning">
         <tr> 
             <th>
                 @Html.DisplayNameFor(model => model.Journal[0].FavoriteScripture)
@@ -44,7 +46,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="color_1">
 @foreach (var item in Model.Journal) {
         <tr>
             <td>
